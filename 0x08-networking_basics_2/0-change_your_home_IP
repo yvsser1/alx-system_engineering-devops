@@ -2,8 +2,26 @@
 # Configures an Ubuntu server as follows:
 #   - localhost resolves to 127.0.0.2
 #   - facebook.com resolves to 8.8.8.8
+# Function to add or update /etc/hosts entries
+add_or_update_hosts_entry() {
+    local ip_address=$1
+    local hostname=$2
 
-cp /etc/hosts ~/hosts.new
-echo "127.0.0.2		localhost" > ~/hosts.new
-echo "8.8.8.8		facebook.com" >> ~/hosts.new
-cp -f ~/hosts.new /etc/hosts
+    # Check if the hostname already exists in /etc/hosts
+    if grep -q "$hostname" /etc/hosts; then
+        # If it exists, update the existing entry
+        sudo sed -i".bak" "s/^.*$hostname.*/$ip_address $hostname/" /etc/hosts
+    else
+        # If it does not exist, add a new entry
+        echo "$ip_address $hostname" | sudo tee -a /etc/hosts > /dev/null
+    fi
+}
+
+# Configure localhost to resolve to 127.0.0.2
+add_or_update_hosts_entry "127.0.0.2" "localhost"
+
+# Configure facebook.com to resolve to 8.8.8.8
+add_or_update_hosts_entry "8.8.8.8" "facebook.com"
+
+# Print a message indicating the script has run successfully
+echo "DNS resolution configuration complete."
