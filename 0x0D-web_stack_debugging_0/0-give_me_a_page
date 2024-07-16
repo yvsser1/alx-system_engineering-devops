@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 # run apache on designated container
-service apache2 start
+
+sudo apt-get update -y
+sudo apt-get install -y apache2
+sudo /etc/init.d/apache2 start
+echo "Hello Holberton" | sudo tee -a /var/www/html/index.html
