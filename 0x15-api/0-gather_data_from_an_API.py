@@ -25,27 +25,20 @@ def get_employee_todo_progress(employee_id):
         print(f"Error: Unable to fetch user data for ID {employee_id}")
         sys.exit(1)
     user_data = user_response.json()
-    employee_name = user_data.get('name')
+    e_name = user_data.get('name')
 
     # Fetch todos for the user
     todos_response = requests.get(f"{base_url}/todos?userId={employee_id}")
     if todos_response.status_code != 200:
-        print(f"Error: Unable to fetch TODO list for employee ID {employee_id}")
+        print(f"Error: Unable to fetch list for employee ID {employee_id}")
         sys.exit(1)
     todos = todos_response.json()
 
-    total_tasks = len(todos)
-    completed_tasks = sum(1 for todo in todos if todo.get('completed', False))
-
-    # Write output to file
-    with open('student_output', 'w') as f:
-        f.write(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):\n")
-        for todo in todos:
-            if todo.get('completed', False):
-                f.write(f"\t {todo.get('title', 'Untitled task')}\n")
+    t_tasks = len(todos)
+    c_tasks = sum(1 for todo in todos if todo.get('completed', False))
 
     # Also print to console
-    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
+    print(f"Employee {e_name} is done with tasks({c_tasks}/{t_tasks}): ")
     for todo in todos:
         if todo.get('completed', False):
             print(f"\t {todo.get('title', 'Untitled task')}")
