@@ -19,25 +19,36 @@ def get_employee_todo_progress(employee_id):
     """
     base_url = "https://jsonplaceholder.typicode.com"
 
-    employee_response = requests.get(f"{base_url}/users/{employee_id}")
-    if employee_response.status_code != 200:
-        print(f"Error: Unable to fetch employee data for ID {employee_id}")
+    # Fetch all users
+    users_response = requests.get(f"{base_url}/users")
+    if users_response.status_code != 200:
+        print(f"Error: Unable to fetch users data")
         sys.exit(1)
-    employee_data = employee_response.json()
-    employee_name = employee_data.get('name', 'Unknown')
+    users = users_response.json()
 
-    todos_response = requests.get(f"{base_url}/users/{employee_id}/todos")
+    # Find the employee by ID
+    employee = next((user for user in users if user.get('id') == employee_id), None)
+    if not employee:
+        print(f"Error: Employee with ID {employee_id} not found")
+        sys.exit(1)
+    employee_name = employee.get('name')
+
+    # Fetch all todos
+    todos_response = requests.get(f"{base_url}/todos")
     if todos_response.status_code != 200:
-        print(f"Error: Unable to fetch TODO list for employee ID {employee_id}")
+        print(f"Error: Unable to fetch TODO list")
         sys.exit(1)
     todos = todos_response.json()
 
-    total_tasks = len(todos)
-    completed_tasks = sum(1 for todo in todos if todo.get('completed', False))
+    # Filter todos for the specific employee
+    employee_todos = [todo for todo in todos if todo.get('userId') == employee_id]
+
+    total_tasks = len(employee_todos)
+    completed_tasks = sum(1 for todo in employee_todos if todo.get('completed', False))
 
     print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
 
-    for todo in todos:
+    for todo in employee_todos:
         if todo.get('completed', False):
             print(f"\t {todo.get('title', 'Untitled task')}")
 
