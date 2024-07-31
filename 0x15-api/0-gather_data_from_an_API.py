@@ -31,7 +31,7 @@ def get_employee_todo_progress(e_id):
     d_tasks = sum(1 for todo in todos if todo['completed'])
 
     # Print progress
-    print(f"{e_name} is done with tasks({d_tasks}/{t_tasks}): ")
+    print(f"Employee {e_name} is done with tasks({d_tasks}/{t_tasks}):")
 
     # Print completed task titles
     for todo in todos:
