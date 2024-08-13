@@ -4,13 +4,23 @@ import requests
 
 
 def number_of_subscribers(subreddit):
-    """Return the total number of subscribers for a given subreddit."""
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/yvsser1"
+        'User-Agent': 'AlxRedditApi/1.0 (by /u/yvsser1)'
     }
-    response = requests.get(url, headers=headers, allow_redirects=False)
-    if response.status_code == 404:
+    try:
+        # Make a GET request to the Reddit API
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the JSON response
+            data = response.json()
+            # Return the number of subscribers
+            return data['data']['subscribers']
+        else:
+            # If the subreddit is not found or any other error occurs, return 0
+            return 0
+    except Exception as e:
+        # If any exception occurs during the process, return 0
+        print(f"An error occurred: {e}")
         return 0
-    results = response.json().get("data")
-    return results.get("subscribers")
