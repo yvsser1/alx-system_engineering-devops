@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" function that queries RedditAPI and returns number of subs for a given subreddit. """
+""" function that returns number of subs for a given subreddit. """
 import requests
 
 
