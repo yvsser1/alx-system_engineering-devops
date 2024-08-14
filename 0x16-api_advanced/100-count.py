@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Function that counts the words in all hotposts for a given subreddit."""
+from collections import Counter
 import requests
 import re
-from collections import Counter
 
 
 def count_words(subreddit, word_list, after=None, word_counts=None):
