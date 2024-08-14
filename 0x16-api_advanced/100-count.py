@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""Function that counts the words in all hot posts for a given Reddit subreddit."""
+"""Function that counts the words in all hotposts for a given subreddit."""
 import requests
 
 
 def count_words(subreddit, word_list, instances={}, after="", count=0):
-    """ prints a sorted count of given keywords found in hot posts of a given subreddit."""
+    """ prints sorted count of given keywords in hotposts for a given sub."""
 
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
