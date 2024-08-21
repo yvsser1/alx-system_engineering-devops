@@ -12,7 +12,7 @@
 
 ### Timeline
 
-![Server Status Meme](https://i.imgur.com/9yVXt8m.jpg)
+![Server Status Meme]([https://i.imgur.com/9yVXt8m.jpg](https://media1.tenor.com/m/I-0U2q1pm3oAAAAC/im-fine-its-fine.gif))
 *“Just a little slowness,” they said. “It’ll be fine,” they said.*  
 
 - **3:45 PM** - Monitoring alerts screamed like a toddler who dropped their ice cream—CRM response times shot through the roof.
@@ -35,7 +35,6 @@
 Step 1: Restarted the server to kick the gremlin out of its RAM nest.  
 Step 2: Devs swooped in to patch up the faulty code, plugging the memory leak for good. No more hogging all the memory for itself.
 
-![Memory Leak Diagram](https://i.imgur.com/Fg6Ghwb.png)
 *Here’s how we fixed it: (1) Identify leak, (2) Kick it out, (3) Patch it up.*
 
 ---
