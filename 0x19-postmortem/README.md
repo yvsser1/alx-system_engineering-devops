@@ -12,7 +12,7 @@
 
 ### Timeline
 
-![Server Status Meme]([https://i.imgur.com/9yVXt8m.jpg](https://media1.tenor.com/m/I-0U2q1pm3oAAAAC/im-fine-its-fine.gif))
+![Server Status Meme](https://media1.tenor.com/m/I-0U2q1pm3oAAAAC/im-fine-its-fine.gif)
 *“Just a little slowness,” they said. “It’ll be fine,” they said.*  
 
 - **3:45 PM** - Monitoring alerts screamed like a toddler who dropped their ice cream—CRM response times shot through the roof.
